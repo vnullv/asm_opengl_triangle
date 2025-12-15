@@ -40,7 +40,7 @@
   # error information
   glfw_init_failed_str: .asciz "failed to init glfw!\n"
 
-  test_int_format: .asciz "%d\n"
+  info_str: .asciz "press ESC to quit.\n"
 
   # vertex information
   vertices:
@@ -56,6 +56,7 @@
   .extern load_vert_shader # src/shaders/loading/shader_loader.s
   .extern load_shader_program # src/shaders/loading/shader_program_loader.s
 
+  # libc
   .extern printf
 
   # glfw
@@ -192,6 +193,9 @@ main:
 
   movl $0, %edi
   call glBindVertexArray # unbind the VAO
+
+  leaq info_str(%rip), %rdi
+  call printf
 
   jmp .Lloop_should_run
 
