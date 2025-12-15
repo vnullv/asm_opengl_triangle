@@ -1,4 +1,4 @@
-simple triangle written in x64 assembly using the GAS assembler
+simple opengl triangle written in x64 assembly using the GAS assembler
 
 ## Build steps
     cmake -B build
