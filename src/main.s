@@ -24,6 +24,7 @@
 # glfw
 .equ GL_COLOR_BUFFER_BIT, 0x00004000
 .equ GLFW_RESIZABLE, 0x00020003
+.equ GLFW_KEY_ESCAPE, 256
 
 .section .rodata
   # directories
@@ -68,6 +69,7 @@
   .extern glfwTerminate
   .extern glfwDestroyWindow
   .extern glfwWindowShouldClose
+  .extern glfwGetKey
 
   # GL - drawing
   .extern glClearColor
@@ -194,6 +196,12 @@ main:
   jmp .Lloop_should_run
 
 .Lmain_loop:
+  movq -32(%rbp), %rdi # window ptr
+  movl $GLFW_KEY_ESCAPE, %esi
+  call glfwGetKey
+  testq %rax, %rax
+  jnz .Lexit_loop
+
   leaq window_color(%rip), %rax
   movss (%rax), %xmm0 # R
   movss 4(%rax), %xmm1 # G
