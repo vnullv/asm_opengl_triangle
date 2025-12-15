@@ -1,3 +1,5 @@
+.file "shaders/program_log_error.s"
+
 .equ GL_LINK_STATUS, 0x8B82
 
 .equ NULL, 0
@@ -64,3 +66,5 @@ get_shader_program_error_log:
   addq $32, %rsp
   leave
   ret
+
+.end
