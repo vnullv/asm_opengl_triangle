@@ -227,6 +227,9 @@ main:
   movl $3, %edx # verticies count
   call glDrawArrays
 
+  movl $0, %edi
+  call glBindVertexArray # unbind vertex array after using
+
   movq -32(%rbp), %rdi
   call glfwSwapBuffers
 
