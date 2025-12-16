@@ -40,6 +40,9 @@
 # *.iml
 # *.ipr
 
+# material theme plugin
+.idea/material_theme_project_new.xml
+
 # CMake
 cmake-build-*/
 
