@@ -96,10 +96,10 @@
 main:
   pushq %rbp
   movq %rsp, %rbp
-  subq $64, %rsp
+  subq $48, %rsp
 
-  movl $0, -64(%rbp) # VAO (vertex array object)
-  movl $0, -56(%rbp) # VBO (vertex buffer object)
+  movl $0, -48(%rbp) # VAO (vertex array object)
+  movl $0, -40(%rbp) # VBO (vertex buffer object)
   movq $0, -32(%rbp) # window ptr
   movl $0, -24(%rbp) # vertex shader id
   movl $0, -16(%rbp) # frag shader id
@@ -155,18 +155,18 @@ main:
 
   # create VAO and VBO
   movl $1, %edi # array count (in this case 1)
-  leaq -64(%rbp), %rsi # VAO ptr
+  leaq -48(%rbp), %rsi # VAO ptr
   call glGenVertexArrays
 
   movl $1, %edi # buffer count (1 in this case)
-  leaq -56(%rbp), %rsi # VBO ptr
+  leaq -40(%rbp), %rsi # VBO ptr
   call glGenBuffers
 
-  movl -64(%rbp), %edi # VAO
+  movl -48(%rbp), %edi # VAO
   call glBindVertexArray
 
   movl $GL_ARRAY_BUFFER, %edi
-  movl -56(%rbp), %esi # VBO
+  movl -40(%rbp), %esi # VBO
   call glBindBuffer
 
   movl $GL_ARRAY_BUFFER, %edi
@@ -219,7 +219,7 @@ main:
   movl -8(%rbp), %edi # shader program id
   call glUseProgram
 
-  movl -64(%rbp), %edi # VAO
+  movl -48(%rbp), %edi # VAO
   call glBindVertexArray
 
   movl $GL_TRIANGLES, %edi
@@ -243,11 +243,11 @@ main:
 
 .Lexit_loop: # fall through if should close
   movl $1, %edi # count
-  leaq -64(%rbp), %rsi # VAO ptr
+  leaq -48(%rbp), %rsi # VAO ptr
   call glDeleteVertexArrays
 
   movl $1, %edi # count
-  leaq -56(%rbp), %rsi # VBO ptr
+  leaq -40(%rbp), %rsi # VBO ptr
   call glDeleteBuffers
 
   movl -8(%rbp), %edi # shader program id
@@ -276,7 +276,7 @@ main:
   movq $EXIT_FAILURE, %rax
 
 .Lexit:
-  addq $64, %rsp
+  addq $48, %rsp
   leave
   ret
 
