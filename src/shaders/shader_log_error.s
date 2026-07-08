@@ -58,6 +58,7 @@ get_shader_error_log:
 
 .Lshader_error_fatal_allocation:
   leaq fatal_memory_allocation_str(%rip), %rdi
+  xorl %eax, %eax
   call printf
 
   call abort

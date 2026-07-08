@@ -200,6 +200,7 @@ main:
   call glBindVertexArray # unbind the VAO
 
   leaq info_str(%rip), %rdi
+  xorl %eax, %eax
   call printf
 
   jmp .Lloop_should_run
@@ -278,6 +279,7 @@ main:
 
 .Lwindow_init_failed:
   leaq window_init_failed_str(%rip), %rdi
+  xorl %eax, %eax
   call printf
   call glfwTerminate
 
@@ -286,6 +288,7 @@ main:
 
 .Lglfw_init_failed:
   leaq glfw_init_failed_str(%rip), %rdi
+  xorl %eax, %eax
   call printf
 
   movq $EXIT_FAILURE, %rax

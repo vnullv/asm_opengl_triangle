@@ -112,6 +112,7 @@ fs_read_file:
   call fclose
 
   leaq failed_to_allocate_str(%rip), %rdi
+  xorl %eax, %eax
   call printf
 
   movq $NULL, %rax
@@ -119,6 +120,7 @@ fs_read_file:
 
 .Lfailed_to_open_file:
   leaq failed_to_open_str(%rip), %rdi
+  xorl %eax, %eax
   call printf
 
   movq $NULL, %rax
@@ -129,6 +131,7 @@ fs_read_file:
   call fclose
 
   leaq file_size_error_str(%rip), %rdi
+  xorl %eax, %eax
   call printf
 
   movq $NULL, %rax
@@ -139,6 +142,7 @@ fs_read_file:
   call fclose
 
   leaq file_too_large_str(%rip), %rdi
+  xorl %eax, %eax
   call printf
 
   movq $NULL, %rax

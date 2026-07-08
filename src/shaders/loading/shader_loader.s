@@ -76,6 +76,7 @@ load_vert_shader:
   movq %rax, -8(%rbp) # store the error log str ptr
   leaq vert_shader_comp_fail_str(%rip), %rdi
   movq -8(%rbp), %rsi # the error string is is rax, move to rsi
+  xorl %eax, %eax
   call printf
 
   movq -8(%rbp), %rdi # free the error log str
@@ -90,6 +91,7 @@ load_vert_shader:
 .Lvert_file_read_fail:
   leaq vert_shader_read_fail_str(%rip), %rdi
   movq -32(%rbp), %rsi # vertex file path str
+  xorl %eax, %eax
   call printf
 
   movl $-1, %eax # failed to create vert shader
@@ -145,6 +147,7 @@ load_frag_shader:
   movq %rax, -8(%rbp) # error log in rax, move to the stack
   leaq frag_shader_comp_fail_str(%rip), %rdi
   movq %rax, %rsi # error log
+  xorl %eax, %eax
   call printf
 
   movq -8(%rbp), %rdi
@@ -159,6 +162,7 @@ load_frag_shader:
 .Lfrag_file_read_fail:
   leaq frag_shader_read_fail_str(%rip), %rdi
   movq -32(%rbp), %rsi # file path str
+  xorl %eax, %eax
   call printf
 
   movq $-1, %rax

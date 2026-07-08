@@ -8,6 +8,9 @@
   .globl load_shader_program # int load_shader_program(int vertex_id, int frag_id);
 
   .extern get_shader_program_error_log # shaders/program_log_error.s
+  
+  .extern printf
+  .extern free
 
   .extern glCreateProgram
   .extern glDeleteProgram
@@ -51,6 +54,7 @@ load_shader_program:
   movq %rax, -8(%rbp) # store on stack
   leaq shader_link_error_str(%rip), %rdi
   movq %rax, %rsi
+  xorl %eax, %eax
   call printf
 
   movq -8(%rbp), %rdi
